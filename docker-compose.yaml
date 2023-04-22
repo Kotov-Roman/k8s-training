@@ -1,0 +1,55 @@
+services:
+  post-service:
+    build: post-service
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - post-db
+    restart: always
+
+  post-db:
+    image: postgres
+    volumes:
+      - post-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5434:5432
+    restart: always
+
+  user-service:
+    build: user-service
+    ports:
+      - 8081:8080
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - user-db
+    restart: always
+
+  user-db:
+    image: postgres
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5435:5432
+    restart: always
+
+volumes:
+  post-db-data:
+  user-db-data:
+
+
+

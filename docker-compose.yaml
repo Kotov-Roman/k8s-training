@@ -1,18 +1,24 @@
 services:
   post-service:
-    build: post-service
+    #    path to dockerfile
+    build: ./post-service
+    container_name: post-service
     ports:
-      - 8080:8080
+      - 8082:8080
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
+      #      - POSTGRES_DB=${POSTGRES_DB}
+      #      - POST_DB_PORT=${POST_DB_PORT}
+      - POST_DB_URL=jdbc:postgresql://post-db:5432/${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - USER_SERVICE_LOCATION=http://user-service:8080/users/
     depends_on:
       - post-db
-    restart: always
+  #    restart: always
 
   post-db:
     image: postgres
+    container_name: post-db
     volumes:
       - post-db-data:/var/lib/postgresql/data
     environment:
@@ -20,23 +26,28 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - 5434:5432
+      - ${POST_DB_PORT}:5432
     restart: always
-
+# had service name 'user_service' but tomcat does not allow domain name to have  underscore'_', so changed to '-'
   user-service:
-    build: user-service
+    #    path to dockerfile
+    build: ./user-service
+    container_name: user-service_container_name
     ports:
       - 8081:8080
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
+      #      - POSTGRES_DB=${POSTGRES_DB}
+      #      - USER_DB_PORT=${USER_DB_PORT}
+      - USER_DB_URL=jdbc:postgresql://user-db:5432/${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     depends_on:
       - user-db
-    restart: always
+  #    restart: always
 
   user-db:
     image: postgres
+    container_name: user-db_container_name
     volumes:
       - user-db-data:/var/lib/postgresql/data
     environment:
@@ -44,7 +55,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - 5435:5432
+      - ${USER_DB_PORT}:5432
     restart: always
 
 volumes:

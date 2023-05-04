@@ -1,0 +1,9 @@
+POST_DB_URL: jdbc:postgresql://localhost:5434/test
+POSTGRES_USER: roma
+POSTGRES_PASSWORD: pass
+#local
+USER_SERVICE_LOCATION: http://localhost:8080/users/
+#docker
+#USER_SERVICE_LOCATION: http://localhost:8081/users/
+server:
+  port: 8090

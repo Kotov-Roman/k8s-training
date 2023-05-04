@@ -1,0 +1,5 @@
+USER_DB_URL: jdbc:postgresql://localhost:5435/test
+POSTGRES_USER: roma
+POSTGRES_PASSWORD: pass
+server:
+  port: 8080

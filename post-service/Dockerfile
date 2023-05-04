@@ -1,10 +1,5 @@
 FROM amazoncorretto:17
-#FROM openjdk:11-jdk
-MAINTAINER myNAME
+MAINTAINER Roman Kotov
 WORKDIR /app
-COPY target/app-full.jar /app/app-full.jar
-ADD pom.xml /app/pom.xml
-#ADD ./../mvnw /app/mvnv
-#ADD ./../.mvn /app/.mvn
-RUN echo "some text" > my.txt
-CMD ["java","-jar","app-full.jar"]
+COPY target/post-service-runnable.jar /app/post-service-runnable.jar
+CMD ["java","-jar","post-service-runnable.jar"]

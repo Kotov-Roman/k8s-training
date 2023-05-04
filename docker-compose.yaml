@@ -1,7 +1,8 @@
 services:
   post-service:
     #    path to dockerfile
-    build: ./post-service
+#    build: ./post-service
+    image: epamromakotov/k8s-post-service:v1
     container_name: post-service
     ports:
       - 8082:8080
@@ -31,7 +32,8 @@ services:
 # had service name 'user_service' but tomcat does not allow domain name to have  underscore'_', so changed to '-'
   user-service:
     #    path to dockerfile
-    build: ./user-service
+#    build: ./user-service
+    image: epamromakotov/k8s-user-service:v1
     container_name: user-service_container_name
     ports:
       - 8081:8080

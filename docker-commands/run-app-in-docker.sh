@@ -21,3 +21,6 @@ docker exec -t -i roma-app /bin/sh
 
 #docker push docker.io/epamromakotov/app:v1
 #docker pull docker.io/epamromakotov/app:v1
+
+#git remote add gitlab git@git.epam.com:Roman_Kotov/k8s-training.git
+#git push -u gitlab main

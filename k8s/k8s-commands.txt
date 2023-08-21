@@ -1,0 +1,22 @@
+
+  501  kubectl get namespace
+  502  kubectl get all
+  503  kubectl apply -f k8s/user-db-config.yaml
+  504  kubectl apply -f k8s/user-db-secret.yaml
+  505  kubectl apply -f k8s/user-db-deployment.yaml
+  506  kubectl apply -f k8s/user-app-deployment.yaml
+  507  kubectl get all
+  508  kubectl get all
+  509  kubectl get configmap
+  510  kubectl get secret
+  511  kubectl get pod
+  512  kubectl get service
+  513  kubectl logs user-app-service
+  514  kubectl logs user-app-deployment-6d74f94f9-q5lx7
+  515  kubectl get pod
+  516  kubectl get pods
+
+  518  kubectl get svc
+  519  kubectl get node
+
+  522  kubectl get node -o wide 524  kubectl get pod -o wide
